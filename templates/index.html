@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Poker Odds Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow p-4" style="width: 100%; max-width: 425px;">
+            <h1 class="mb-4 text-center">Poker Odds Calculator</h1>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Your Hand:</label>
+                    <div class="d-flex gap-2">
+                        <select class="form-select" name="your_hand_rank1">
+                          <option value="" {% if selected.your_hand_rank1 == '' %}selected{% endif %}>--</option>
+                          <option value="A" {% if selected.your_hand_rank1 == 'A' or selected.your_hand_rank1 is not defined %}selected{% endif %}>A</option>
+                          <option value="K" {% if selected.your_hand_rank1 == 'K' %}selected{% endif %}>K</option>
+                          <option value="Q" {% if selected.your_hand_rank1 == 'Q' %}selected{% endif %}>Q</option>
+                          <option value="J" {% if selected.your_hand_rank1 == 'J' %}selected{% endif %}>J</option>
+                          <option value="10" {% if selected.your_hand_rank1 == '10' %}selected{% endif %}>10</option>
+                          <option value="9" {% if selected.your_hand_rank1 == '9' %}selected{% endif %}>9</option>
+                          <option value="8" {% if selected.your_hand_rank1 == '8' %}selected{% endif %}>8</option>
+                          <option value="7" {% if selected.your_hand_rank1 == '7' %}selected{% endif %}>7</option>
+                          <option value="6" {% if selected.your_hand_rank1 == '6' %}selected{% endif %}>6</option>
+                          <option value="5" {% if selected.your_hand_rank1 == '5' %}selected{% endif %}>5</option>
+                          <option value="4" {% if selected.your_hand_rank1 == '4' %}selected{% endif %}>4</option>
+                          <option value="3" {% if selected.your_hand_rank1 == '3' %}selected{% endif %}>3</option>
+                          <option value="2" {% if selected.your_hand_rank1 == '2' %}selected{% endif %}>2</option>
+                        </select>
+                        <select class="form-select" name="your_hand_suit1">
+                          <option value="" {% if selected.your_hand_suit1 == '' %}selected{% endif %}>--</option>
+                          <option value="h" {% if selected.your_hand_suit1 == 'h' or selected.your_hand_suit1 is not defined %}selected{% endif %}>♥</option>
+                          <option value="d" {% if selected.your_hand_suit1 == 'd' %}selected{% endif %}>♦</option>
+                          <option value="c" {% if selected.your_hand_suit1 == 'c' %}selected{% endif %}>♣</option>
+                          <option value="s" {% if selected.your_hand_suit1 == 's' %}selected{% endif %}>♠</option>
+                        </select>
+                        <select class="form-select" name="your_hand_rank2">
+                          <option value="" {% if selected.your_hand_rank2 == '' %}selected{% endif %}>--</option>
+                          <option value="A" {% if selected.your_hand_rank2 == 'A' or selected.your_hand_rank2 is not defined %}selected{% endif %}>A</option>
+                          <option value="K" {% if selected.your_hand_rank2 == 'K' %}selected{% endif %}>K</option>
+                          <option value="Q" {% if selected.your_hand_rank2 == 'Q' %}selected{% endif %}>Q</option>
+                          <option value="J" {% if selected.your_hand_rank2 == 'J' %}selected{% endif %}>J</option>
+                          <option value="10" {% if selected.your_hand_rank2 == '10' %}selected{% endif %}>10</option>
+                          <option value="9" {% if selected.your_hand_rank2 == '9' %}selected{% endif %}>9</option>
+                          <option value="8" {% if selected.your_hand_rank2 == '8' %}selected{% endif %}>8</option>
+                          <option value="7" {% if selected.your_hand_rank2 == '7' %}selected{% endif %}>7</option>
+                          <option value="6" {% if selected.your_hand_rank2 == '6' %}selected{% endif %}>6</option>
+                          <option value="5" {% if selected.your_hand_rank2 == '5' %}selected{% endif %}>5</option>
+                          <option value="4" {% if selected.your_hand_rank2 == '4' %}selected{% endif %}>4</option>
+                          <option value="3" {% if selected.your_hand_rank2 == '3' %}selected{% endif %}>3</option>
+                          <option value="2" {% if selected.your_hand_rank2 == '2' %}selected{% endif %}>2</option>
+                        </select>
+                        <select class="form-select" name="your_hand_suit2">
+                          <option value="" {% if selected.your_hand_suit2 == '' %}selected{% endif %}>--</option>
+                          <option value="h" {% if selected.your_hand_suit2 == 'h' %}selected{% endif %}>♥</option>
+                          <option value="d" {% if selected.your_hand_suit2 == 'd' %}selected{% endif %}>♦</option>
+                          <option value="c" {% if selected.your_hand_suit2 == 'c' %}selected{% endif %}>♣</option>
+                          <option value="s" {% if selected.your_hand_suit2 == 's' or selected.your_hand_suit2 is not defined %}selected{% endif %}>♠</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Opponent Hand:</label>
+                    <div class="d-flex gap-2">
+                        <select class="form-select" name="opponent_hand_rank1">
+                          <option value="" {% if selected.opponent_hand_rank1 == '' %}selected{% endif %}>--</option>
+                          <option value="A" {% if selected.opponent_hand_rank1 == 'A' %}selected{% endif %}>A</option>
+                          <option value="K" {% if selected.opponent_hand_rank1 == 'K' or selected.opponent_hand_rank1 is not defined %}selected{% endif %}>K</option>
+                          <option value="Q" {% if selected.opponent_hand_rank1 == 'Q' %}selected{% endif %}>Q</option>
+                          <option value="J" {% if selected.opponent_hand_rank1 == 'J' %}selected{% endif %}>J</option>
+                          <option value="10" {% if selected.opponent_hand_rank1 == '10' %}selected{% endif %}>10</option>
+                          <option value="9" {% if selected.opponent_hand_rank1 == '9' %}selected{% endif %}>9</option>
+                          <option value="8" {% if selected.opponent_hand_rank1 == '8' %}selected{% endif %}>8</option>
+                          <option value="7" {% if selected.opponent_hand_rank1 == '7' %}selected{% endif %}>7</option>
+                          <option value="6" {% if selected.opponent_hand_rank1 == '6' %}selected{% endif %}>6</option>
+                          <option value="5" {% if selected.opponent_hand_rank1 == '5' %}selected{% endif %}>5</option>
+                          <option value="4" {% if selected.opponent_hand_rank1 == '4' %}selected{% endif %}>4</option>
+                          <option value="3" {% if selected.opponent_hand_rank1 == '3' %}selected{% endif %}>3</option>
+                          <option value="2" {% if selected.opponent_hand_rank1 == '2' %}selected{% endif %}>2</option>
+                        </select>
+                        <select class="form-select" name="opponent_hand_suit1">
+                          <option value="" {% if selected.opponent_hand_suit1 == '' %}selected{% endif %}>--</option>
+                          <option value="h" {% if selected.opponent_hand_suit1 == 'h' or selected.opponent_hand_suit1 is not defined %}selected{% endif %}>♥</option>
+                          <option value="d" {% if selected.opponent_hand_suit1 == 'd' %}selected{% endif %}>♦</option>
+                          <option value="c" {% if selected.opponent_hand_suit1 == 'c' %}selected{% endif %}>♣</option>
+                          <option value="s" {% if selected.opponent_hand_suit1 == 's' %}selected{% endif %}>♠</option>
+                        </select>
+                        <select class="form-select" name="opponent_hand_rank2">
+                          <option value="" {% if selected.opponent_hand_rank2 == '' %}selected{% endif %}>--</option>
+                          <option value="A" {% if selected.opponent_hand_rank2 == 'A' %}selected{% endif %}>A</option>
+                          <option value="K" {% if selected.opponent_hand_rank2 == 'K' or selected.opponent_hand_rank2 is not defined %}selected{% endif %}>K</option>
+                          <option value="Q" {% if selected.opponent_hand_rank2 == 'Q' %}selected{% endif %}>Q</option>
+                          <option value="J" {% if selected.opponent_hand_rank2 == 'J' %}selected{% endif %}>J</option>
+                          <option value="10" {% if selected.opponent_hand_rank2 == '10' %}selected{% endif %}>10</option>
+                          <option value="9" {% if selected.opponent_hand_rank2 == '9' %}selected{% endif %}>9</option>
+                          <option value="8" {% if selected.opponent_hand_rank2 == '8' %}selected{% endif %}>8</option>
+                          <option value="7" {% if selected.opponent_hand_rank2 == '7' %}selected{% endif %}>7</option>
+                          <option value="6" {% if selected.opponent_hand_rank2 == '6' %}selected{% endif %}>6</option>
+                          <option value="5" {% if selected.opponent_hand_rank2 == '5' %}selected{% endif %}>5</option>
+                          <option value="4" {% if selected.opponent_hand_rank2 == '4' %}selected{% endif %}>4</option>
+                          <option value="3" {% if selected.opponent_hand_rank2 == '3' %}selected{% endif %}>3</option>
+                          <option value="2" {% if selected.opponent_hand_rank2 == '2' %}selected{% endif %}>2</option>
+                        </select>
+                        <select class="form-select" name="opponent_hand_suit2">
+                          <option value="" {% if selected.opponent_hand_suit2 == '' %}selected{% endif %}>--</option>
+                          <option value="h" {% if selected.opponent_hand_suit2 == 'h' %}selected{% endif %}>♥</option>
+                          <option value="d" {% if selected.opponent_hand_suit2 == 'd' %}selected{% endif %}>♦</option>
+                          <option value="c" {% if selected.opponent_hand_suit2 == 'c' %}selected{% endif %}>♣</option>
+                          <option value="s" {% if selected.opponent_hand_suit2 == 's' or selected.opponent_hand_suit2 is not defined %}selected{% endif %}>♠</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Community Cards (optional):</label><br>
+                    <div class="mb-2">
+                        <strong>Flop:</strong><br>
+                        <select class="form-select d-inline w-auto me-2" name="board_rank1">
+                          <option value="">--</option>
+                          <option value="A">A</option>
+                          <option value="K">K</option>
+                          <option value="Q">Q</option>
+                          <option value="J">J</option>
+                          <option value="10">10</option>
+                          <option value="9">9</option>
+                          <option value="8">8</option>
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                        </select>
+                        <select class="form-select d-inline w-auto" name="board_suit1">
+                          <option value="">--</option>
+                          <option value="h">♥</option>
+                          <option value="d">♦</option>
+                          <option value="c">♣</option>
+                          <option value="s">♠</option>
+                        </select>
+                        <br>
+                        <select class="form-select d-inline w-auto me-2" name="board_rank2">
+                          <option value="">--</option>
+                          <option value="A">A</option>
+                          <option value="K">K</option>
+                          <option value="Q">Q</option>
+                          <option value="J">J</option>
+                          <option value="10">10</option>
+                          <option value="9">9</option>
+                          <option value="8">8</option>
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                        </select>
+                        <select class="form-select d-inline w-auto" name="board_suit2">
+                          <option value="">--</option>
+                          <option value="h">♥</option>
+                          <option value="d">♦</option>
+                          <option value="c">♣</option>
+                          <option value="s">♠</option>
+                        </select>
+                        <br>
+                        <select class="form-select d-inline w-auto me-2" name="board_rank3">
+                          <option value="">--</option>
+                          <option value="A">A</option>
+                          <option value="K">K</option>
+                          <option value="Q">Q</option>
+                          <option value="J">J</option>
+                          <option value="10">10</option>
+                          <option value="9">9</option>
+                          <option value="8">8</option>
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                        </select>
+                        <select class="form-select d-inline w-auto" name="board_suit3">
+                          <option value="">--</option>
+                          <option value="h">♥</option>
+                          <option value="d">♦</option>
+                          <option value="c">♣</option>
+                          <option value="s">♠</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Turn:</strong>
+                        <select class="form-select d-inline w-auto" name="board_rank4">
+                          <option value="">--</option>
+                          <option value="A">A</option>
+                          <option value="K">K</option>
+                          <option value="Q">Q</option>
+                          <option value="J">J</option>
+                          <option value="10">10</option>
+                          <option value="9">9</option>
+                          <option value="8">8</option>
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                        </select>
+                        <select class="form-select d-inline w-auto" name="board_suit4">
+                          <option value="">--</option>
+                          <option value="h">♥</option>
+                          <option value="d">♦</option>
+                          <option value="c">♣</option>
+                          <option value="s">♠</option>
+                        </select>
+                    </div>
+                    <div>
+                        <strong>River:</strong>
+                        <select class="form-select d-inline w-auto" name="board_rank5">
+                          <option value="">--</option>
+                          <option value="A">A</option>
+                          <option value="K">K</option>
+                          <option value="Q">Q</option>
+                          <option value="J">J</option>
+                          <option value="10">10</option>
+                          <option value="9">9</option>
+                          <option value="8">8</option>
+                          <option value="7">7</option>
+                          <option value="6">6</option>
+                          <option value="5">5</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                        </select>
+                        <select class="form-select d-inline w-auto" name="board_suit5">
+                          <option value="">--</option>
+                          <option value="h">♥</option>
+                          <option value="d">♦</option>
+                          <option value="c">♣</option>
+                          <option value="s">♠</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Calculate Odds</button>
+            </form>
+            {% if odds is not none %}
+                <div class="mt-4">
+                    {% if input_summary.board and input_summary.board|length > 0 %}
+                    <div class="mb-2 text-center">
+                        <strong>Board:</strong> {{ input_summary.board|join(' ') }}
+                    </div>
+                    {% endif %}
+                    <h5 class="mt-4 text-center">Odds Table</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Hands</th>
+                                    <th>Win (%)</th>
+                                    <th>Tie (%)</th>
+                                    <th>Loss (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><br><small>{{ input_summary.your_hand|join(' ') }}</small></td>
+                                    <td>{{ odds.win }}</td>
+                                    <td>{{ odds.tie }}</td>
+                                    <td>{{ odds.loss }}</td>
+                                </tr>
+                                <tr>
+                                    <td><br><small>{{ input_summary.opponent_hand|join(' ') }}</small></td>
+                                    <td>{{ odds.loss }}</td>
+                                    <td>{{ odds.tie }}</td>
+                                    <td>{{ odds.win }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
